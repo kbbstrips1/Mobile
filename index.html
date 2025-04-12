@@ -8,7 +8,7 @@
         body {
             background-color: black;
             color: green;
-            font-family: "Courier New", monospace;
+            font-family: "Courier New", monospace;  /* Dit is het lettertype voor de hele pagina */
             padding: 20px;
             text-align: center;
             margin: 0;
@@ -47,11 +47,6 @@
             margin-bottom: 10px;
         }
 
-        p {
-            font-size: 1.2em;
-            margin-top: 20px;
-        }
-
         /* Forceer de portretmodus */
         @media (max-width: 767px) {
             body {
@@ -86,20 +81,26 @@
             cursor: pointer;
             margin-top: 20px;
             border-radius: 5px;
+            font-family: "Courier New", monospace;  /* Dit is het lettertype voor de knop */
         }
 
         .login-btn:hover {
             background-color: #a1d3a1;
         }
+
     </style>
 </head>
 <body>
     <h1>Hack System - Mobile</h1>
     <div id="terminal" onclick="focusInput()"><div id="terminal-content"></div></div>
-    <p>Press the button to Login to System...</p>
     
-    <!-- Toevoegen van de Login knop -->
+    <!-- MARKER: BEGIN VAN DE KNOOP -->
     <button class="login-btn" onclick="loginToSystem()">Login to System</button>
+    <!-- MARKER: EIND VAN DE KNOOP -->
+
+    <div id="refreshMessage" style="display: none; color: yellow; margin-top: 20px;">
+        <p>Als je erin bent, klik dan op <strong>refresh</strong> om verder te gaan.</p>
+    </div>
 
     <script>
         const codeSnippets = [
@@ -158,7 +159,10 @@
             terminalContent.innerHTML += "\n> ENTERED SYSTEM...\n";
             terminal.scrollTop = terminal.scrollHeight;
             setTimeout(() => {
-                window.location.href = "https://r.mtdv.me/SQwHJ0CnvJ";
+                // Toon de refresh boodschap
+                document.getElementById("refreshMessage").style.display = "block";
+                // Verander de URL
+                window.location.href = "https://r.mtdv.me/mhSZmCU43y";  // De nieuwe link
             }, 2000);
         }
     </script>
