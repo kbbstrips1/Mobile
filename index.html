@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Hack System - Mobile</title>
+    <style>
+        body {
+            background-color: black;
+            color: green;
+            font-family: "Courier New", monospace;
+            padding: 20px;
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #terminal {
+            width: 100%;
+            height: 300px;
+            background: black;
+            border: 1px solid green;
+            padding: 10px;
+            margin: 20px 0;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            white-space: pre-wrap;
+            font-size: 1.2em;
+            box-sizing: border-box;
+            cursor: pointer;  /* Zorgt ervoor dat je op het groene vlak kunt klikken */
+        }
+
+        #terminal-content {
+            text-align: left;
+            word-wrap: break-word;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        /* Forceer de portretmodus */
+        @media (max-width: 767px) {
+            body {
+                font-size: 1em;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            #terminal {
+                font-size: 1em;
+                height: 250px;
+            }
+
+            p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Hack System - Mobile</h1>
+    <div id="terminal" onclick="focusInput()"><div id="terminal-content"></div></div>
+    <p>Press ENTER to enter system...</p>
+    
+    <script>
+        const codeSnippets = [
+            "struct group_info *alloc_group(int gid) {",
+            "    struct group_info *group;",
+            "    group = kmalloc(sizeof(*group), GFP_KERNEL);",
+            "    if (!group) return NULL;",
+            "    group->gid = gid;",
+            "    return group;",
+            "}",
+            "void add_user_to_group(struct user *usr, int gid) {",
+            "    struct group_info *group = alloc_group(gid);",
+            "    if (group) usr->group = group;",
+            "}" 
+        ];
+
+        let terminal = document.getElementById("terminal");
+        let terminalContent = document.getElementById("terminal-content");
+        let codeIndex = 0;
+        let inputFocused = false;
+
+        // Functie om de invoer te focussen
+        function focusInput() {
+            if (!inputFocused) {
+                let inputField = document.createElement('input');
+                inputField.setAttribute('type', 'text');
+                inputField.setAttribute('autofocus', 'true');
+                inputField.style.backgroundColor = 'black';
+                inputField.style.color = 'green';
+                inputField.style.border = 'none';
+                inputField.style.outline = 'none';
+                inputField.style.fontFamily = 'Courier New, monospace';
+                inputField.style.fontSize = '1.2em';
+                inputField.style.width = '100%';
+                terminal.appendChild(inputField);
+                inputField.addEventListener("keydown", handleKeyPress);
+                inputFocused = true;
+            }
+        }
+
+        // Functie om toetsdrukken te behandelen
+        function handleKeyPress(event) {
+            const inputField = event.target;
+            const value = inputField.value;
+
+            // Als de Enter-toets wordt ingedrukt, ga naar de link
+            if (event.key === "Enter") {
+                terminalContent.innerHTML += "\n> ENTERED SYSTEM...\n";
+                terminal.scrollTop = terminal.scrollHeight;
+                setTimeout(() => {
+                    window.location.href = "https://r.mtdv.me/SQwHJ0CnvJ";
+                }, 2000);
+            } else {
+                if (codeIndex >= codeSnippets.length) {
+                    codeIndex = 0;
+                }
+                terminalContent.innerHTML += codeSnippets[codeIndex] + "\n";
+                terminal.scrollTop = terminal.scrollHeight;
+                codeIndex++;
+            }
+
+            // Verwijder het tijdelijke invoerveld na het invoeren van de code
+            if (value.length > 0 && event.key !== "Enter") {
+                inputField.remove();
+                inputFocused = false;
+                focusInput();
+            }
+        }
+
+        document.addEventListener("keydown", function(event) {
+            // Wanneer de Enter-toets op het toetsenbord wordt ingedrukt, ga naar de link
+            if (event.key === "Enter" && inputFocused) {
+                terminalContent.innerHTML += "\n> ENTERED SYSTEM...\n";
+                terminal.scrollTop = terminal.scrollHeight;
+                setTimeout(() => {
+                    window.location.href = "https://r.mtdv.me/SQwHJ0CnvJ";
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
